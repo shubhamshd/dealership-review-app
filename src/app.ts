@@ -1,5 +1,5 @@
 // src/app.ts
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response } from 'express';
 
 const app: Express = express();
 const port: number = 3000;
@@ -8,8 +8,8 @@ const port: number = 3000;
 app.use(express.json());
 
 // Define routes
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to the Dealership Review Website API!");
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to the Dealership Review Website API!');
 });
 
 // Start the server
