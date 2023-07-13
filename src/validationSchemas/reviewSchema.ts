@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const reviewSchema = Joi.object({
+const create = Joi.object({
   dealershipName: Joi.string().required(),
   productDetails: Joi.object({
     make: Joi.string().required(),
@@ -13,14 +13,16 @@ const reviewSchema = Joi.object({
       text: Joi.string().required(),
       timestamp: Joi.date().default(Date.now),
       user: Joi.string().required(),
-    }),
-  ),
-  media: Joi.array().items(
-    Joi.object({
-      url: Joi.string().required(),
-      type: Joi.string().required(),
+      media: Joi.array()
+        .items(
+          Joi.object({
+            url: Joi.string().required(),
+            type: Joi.string().required(),
+          }),
+        )
+        .optional(),
     }),
   ),
 });
 
-export default reviewSchema;
+export default { create };
