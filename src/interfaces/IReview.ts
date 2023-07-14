@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 
 interface IReview extends Document {
   dealershipName: string;
@@ -15,7 +15,7 @@ interface IReview extends Document {
     media?: Array<{
       type: 'image' | 'video' | 'external';
       imageData?: Buffer;
-      mediaId?: string;
+      mediaId?: ObjectId;
       url?: string;
     }>;
   }[];

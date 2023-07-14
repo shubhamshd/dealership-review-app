@@ -16,9 +16,11 @@ const create = Joi.object({
       media: Joi.array()
         .items(
           Joi.object({
-            url: Joi.string().required(),
-            type: Joi.string().required(),
-          }),
+            type: Joi.string().valid('image', 'video', 'external').required(),
+            imageData: Joi.binary().encoding('base64'),
+            mediaId: Joi.string(),
+            url: Joi.string(),
+          }).or('imageData', 'mediaId', 'url').required(),
         )
         .optional(),
     }),

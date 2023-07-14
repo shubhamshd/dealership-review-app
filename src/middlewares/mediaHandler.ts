@@ -6,12 +6,11 @@ import { Readable } from 'stream';
 
 export const mediaHandler = async (req: MulterRequest, res: Response, next: NextFunction) => {
   try {
-    const { dealershipName, productDetails, rating, comment } = req.body;
+    const { dealershipName, productDetails, rating, comment} = req.body;
     const mediaFiles = req.files as Express.Multer.File[]; // Cast to specific type
 
     const commentWithMedia: any = {
       text: comment.text,
-      timestamp: comment.timestamp,
       user: comment.user,
       media: [],
     };
@@ -59,7 +58,13 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
       commentWithMedia.media.push(...externalMedia);
     }
 
-    req.body.commentWithMedia = commentWithMedia;
+    req.body = {
+      dealershipName,
+      productDetails,
+      rating,
+      comments: comment
+    };
+    
     next();
   } catch (error) {
     console.error('Error processing media files:', error);

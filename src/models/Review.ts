@@ -1,45 +1,63 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, SchemaTypes } from 'mongoose';
 import IReview from '../interfaces/IReview';
 
-const ReviewSchema = new Schema({
-  dealershipName: { type: String, required: true },
-  productDetails: {
-    type: {
-      make: { type: String, required: true },
-      model: { type: String, required: true },
-      variant: { type: String, required: true },
-    },
+
+const mediaSchema = new Schema({
+  type: {
+    type: String,
+    enum: ['image', 'video', 'external'],
     required: true,
   },
-  rating: { type: Number, required: true },
-  comments: [
-    {
-      text: { type: String, required: true },
-      date: { type: Date, default: Date.now },
-      user: { type: String, required: true },
-      media: [
-        {
-          type: {
-            type: String,
-            enum: ['image', 'video', 'external'],
-            required: true,
-          },
-          imageData: {
-            type: Buffer,
-          },
-          mediaId: {
-            type: String,
-          },
-          url: {
-            type: String,
-          },
-          required: false,
-        }
-      ],
-    },
-  ],
+  imageData: Buffer,
+  mediaId: { 
+    type: SchemaTypes.ObjectId, 
+    ref: 'Media',
+  },
+  url: String,
 });
 
-const ReviewModel = model<IReview>('Review', ReviewSchema, 'reviews');
+const commentSchema = new Schema({
+  text: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  user: {
+    type: String,
+    required: true,
+  },
+  media: [mediaSchema],
+});
+
+const reviewSchema = new Schema({
+  dealershipName: {
+    type: String,
+    required: true,
+  },
+  productDetails: {
+    make: {
+      type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    variant: {
+      type: String,
+      required: true,
+    },
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  comments: [commentSchema],
+});
+
+const ReviewModel = model<IReview>('Review', reviewSchema, 'reviews');
 
 export default ReviewModel;
