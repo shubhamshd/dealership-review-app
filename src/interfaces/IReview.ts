@@ -12,10 +12,12 @@ interface IReview extends Document {
     text: string;
     timestamp: Date;
     user: string;
-    media?: {
-      url: string;
-      type: string;
-    }[];
+    media?: Array<{
+      type: 'image' | 'video' | 'external';
+      imageData?: Buffer;
+      mediaId?: string;
+      url?: string;
+    }>;
   }[];
 }
 

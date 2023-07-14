@@ -17,17 +17,29 @@ const ReviewSchema = new Schema({
       text: { type: String, required: true },
       date: { type: Date, default: Date.now },
       user: { type: String, required: true },
-      media: {
-        type: {
-          url: { type: String, required: true },
-          type: { type: String, required: true },
-        },
-        required: false,
-      },
+      media: [
+        {
+          type: {
+            type: String,
+            enum: ['image', 'video', 'external'],
+            required: true,
+          },
+          imageData: {
+            type: Buffer,
+          },
+          mediaId: {
+            type: String,
+          },
+          url: {
+            type: String,
+          },
+          required: false,
+        }
+      ],
     },
   ],
 });
 
-const ReviewModel = model<IReview>('Review', ReviewSchema);
+const ReviewModel = model<IReview>('Review', ReviewSchema, 'reviews');
 
 export default ReviewModel;
