@@ -1,15 +1,18 @@
 // src/utils/gridfsStorage.ts
 
-import { GridFSBucket, MongoClient, ObjectId } from 'mongodb';
+import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
 import { Readable } from 'stream';
+import { configDotenv } from 'dotenv';
 
-const connectionURL = 'mongodb://localhost:27017'; // Update with your MongoDB connection URL
-const dbName = 'your-db-name'; // Update with your MongoDB database name
+configDotenv();
+const connectionURL = process.env.MONGO_URL || 'default-mongo-url';
+const dbName = process.env.DB_NAME;
 
 let gridFSBucket: GridFSBucket;
 
 (async () => {
-  const client = new MongoClient(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true });
+  const client = new MongoClient(connectionURL);
+  
   await client.connect();
   const db = client.db(dbName);
   gridFSBucket = new GridFSBucket(db);

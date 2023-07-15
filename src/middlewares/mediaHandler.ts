@@ -6,12 +6,12 @@ import { Readable } from 'stream';
 
 export const mediaHandler = async (req: MulterRequest, res: Response, next: NextFunction) => {
   try {
-    const { dealershipName, productDetails, rating, comment} = req.body;
+    const { dealershipName, productDetails, rating, comments} = req.body;
     const mediaFiles = req.files as Express.Multer.File[]; // Cast to specific type
 
     const commentWithMedia: any = {
-      text: comment.text,
-      user: comment.user,
+      text: comments.text,
+      user: comments.user,
       media: [],
     };
     if (Array.isArray(mediaFiles) && mediaFiles.length > 0) {
@@ -62,7 +62,7 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
       dealershipName,
       productDetails,
       rating,
-      comments: comment
+      comments: commentWithMedia
     };
     
     next();

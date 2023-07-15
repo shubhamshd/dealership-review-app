@@ -7,6 +7,7 @@ const createReview = async (req: MulterRequest, res: Response) => {
     const savedReview = await reviewService.createReview(req.body);
     return res.status(201).json(savedReview);
   } catch (err) {
+    console.log('error in controller : ', err)
     res.status(500).json({ error: err });
   }
 };
