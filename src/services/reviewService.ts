@@ -7,7 +7,7 @@ const createReview = async (reviewData: IReview): Promise<IReview> => {
     const savedReview = await newReview.save();
     return savedReview;
   } catch (err) {
-    console.log('Error creating review:');
+    console.log('Error creating review:', err);
     throw new Error('Failed to create review');
   }
 };
