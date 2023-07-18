@@ -1,5 +1,5 @@
 import IReview from '../interfaces/IReview';
-import ReviewModel from '../models/Review';
+import ReviewModel from '../models/reviewModel';
 
 const createReview = async (reviewData: IReview): Promise<IReview> => {
   try {
