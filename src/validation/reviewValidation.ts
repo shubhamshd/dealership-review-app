@@ -7,11 +7,11 @@ const create = Joi.object({
     model: Joi.string().required(),
     variant: Joi.string().required(),
   }),
+  user: Joi.string().required(),
   rating: Joi.number().required().min(1).max(5),
   comment: Joi.object({
     text: Joi.string().required(),
     timestamp: Joi.date().default(Date.now),
-    user: Joi.string().required(),
     media: Joi.array()
       .items(
         Joi.object({
@@ -32,10 +32,10 @@ const updateReviewComment = Joi.object({
     model: Joi.string().required(),
     variant: Joi.string().required(),
   }),
+  user: Joi.string().required(),
   comment: Joi.object({
     text: Joi.string().required(),
     timestamp: Joi.date().default(Date.now),
-    user: Joi.string().required(),
     media: Joi.array()
       .items(
         Joi.object({

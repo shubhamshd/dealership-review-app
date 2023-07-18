@@ -25,10 +25,6 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  user: {
-    type: String,
-    required: true,
-  },
   media: [mediaSchema],
 });
 
@@ -50,6 +46,10 @@ const reviewSchema = new Schema({
       type: String,
       required: true,
     },
+  },
+  user: {
+    type: String,
+    required: true,
   },
   rating: {
     type: Number,

@@ -7,11 +7,11 @@ interface IReview extends Document {
     model: string;
     variant: string;
   };
+  user: string;
   rating: number;
   comments: {
     text: string;
     timestamp: Date;
-    user: string;
     media?: Array<{
       type: 'image' | 'video' | 'external';
       imageData?: Buffer;

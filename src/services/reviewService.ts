@@ -19,6 +19,7 @@ const updateReviewComment = async (reviewData: IReview): Promise<IReview | null>
       'productDetails.make': reviewData.productDetails.make,
       'productDetails.model': reviewData.productDetails.model,
       'productDetails.variant': reviewData.productDetails.variant,
+      'user': reviewData.user
     };
 
     const update = {
