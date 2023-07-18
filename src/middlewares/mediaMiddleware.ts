@@ -6,7 +6,8 @@ import { Readable } from 'stream';
 
 export const mediaHandler = async (req: MulterRequest, res: Response, next: NextFunction) => {
   try {
-    const { dealershipName, productDetails, rating, comment} = req.body;
+    // const { dealershipName, productDetails, rating, comment} = req.body;
+    const { comment, ...rest } = req.body;
     const mediaFiles = req.files as Express.Multer.File[]; // Cast to specific type
 
     const commentWithMedia: any = {
@@ -59,10 +60,8 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
     }
 
     req.body = {
-      dealershipName,
-      productDetails,
-      rating,
-      comments: [commentWithMedia]
+      comments: [commentWithMedia],
+      ...rest
     };
     
     next();

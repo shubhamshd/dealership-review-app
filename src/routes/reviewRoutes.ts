@@ -1,11 +1,12 @@
 import express from 'express';
 import reviewController from '../controllers/reviewController';
-import validate from '../middlewares/validationHandler';
-import reviewSchema from '../validation/reviewValidation';
-import { mediaHandler } from '../middlewares/mediaHandler';
+import validate from '../middlewares/validationMiddleware';
+import reviewValidation from '../validation/reviewValidation';
+import { mediaHandler } from '../middlewares/mediaMiddleware';
 
 const router = express.Router();
 
-router.post('/create', validate(reviewSchema.create), mediaHandler, reviewController.createReview);
+router.post('/create', validate(reviewValidation.create), mediaHandler, reviewController.createReview);
+router.post('/updateReviewComment', validate(reviewValidation.updateReviewComment), mediaHandler, reviewController.updateReviewComment);
 
 export default router;

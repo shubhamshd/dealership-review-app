@@ -12,4 +12,14 @@ const createReview = async (req: MulterRequest, res: Response) => {
   }
 };
 
-export default { createReview };
+const updateReviewComment = async (req: MulterRequest, res: Response) => {
+  try {
+    const savedReview = await reviewService.updateReviewComment(req.body);
+    return res.status(201).json(savedReview);
+  } catch (err) {
+    console.log('error in controller : ', err)
+    res.status(500).json({ error: err });
+  }
+};
+
+export default { createReview, updateReviewComment };

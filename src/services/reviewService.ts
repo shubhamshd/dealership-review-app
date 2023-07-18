@@ -12,4 +12,25 @@ const createReview = async (reviewData: IReview): Promise<IReview> => {
   }
 };
 
-export default { createReview };
+const updateReviewComment = async (reviewData: IReview): Promise<IReview | null> => {
+  try {
+    const filter = {
+      'dealershipName': reviewData.dealershipName,
+      'productDetails.make': reviewData.productDetails.make,
+      'productDetails.model': reviewData.productDetails.model,
+      'productDetails.variant': reviewData.productDetails.variant,
+    };
+
+    const update = {
+      $push: { comments: reviewData.comments },
+    };
+
+    const updatedReview = await ReviewModel.findOneAndUpdate(filter, update, { new: true });
+    return updatedReview;
+  } catch (err) {
+    console.log('Error updating review comment:', err);
+    throw new Error('Failed to update review comment');
+  }
+};
+
+export default { createReview, updateReviewComment };
