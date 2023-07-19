@@ -7,7 +7,7 @@ import { Readable } from 'stream';
 export const mediaHandler = async (req: MulterRequest, res: Response, next: NextFunction) => {
   try {
     // const { dealershipName, productDetails, rating, comment} = req.body;
-    const { comment, ...rest } = req.body;
+    const { comment, externalLinks, ...rest } = req.body;
     const mediaFiles = req.files as Express.Multer.File[]; // Cast to specific type
 
     const commentWithMedia: any = {
@@ -47,8 +47,7 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
       commentWithMedia.media = media.filter((m) => m !== null);
     }
 
-    if (req.body.externalLinks && req.body.externalLinks.length > 0) {
-      const externalLinks = req.body.externalLinks;
+    if (externalLinks && externalLinks.length > 0) {
       const externalMedia = externalLinks.map((link: string) => {
         return {
           type: 'external',

@@ -47,6 +47,7 @@ const updateReviewComment = Joi.object({
       )
       .optional(),
   }),
+  externalLinks: Joi.array().items(Joi.string())
 });
 
 export default { create, updateReviewComment };

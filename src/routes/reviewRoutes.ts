@@ -6,7 +6,7 @@ import { mediaHandler } from '../middlewares/mediaMiddleware';
 
 const router = express.Router();
 
-router.post('/create', validate(reviewValidation.create), mediaHandler, reviewController.createReview);
+router.post('/createReview', validate(reviewValidation.create), mediaHandler, reviewController.createReview);
 router.post('/updateReviewComment', validate(reviewValidation.updateReviewComment), mediaHandler, reviewController.updateReviewComment);
 
 export default router;
