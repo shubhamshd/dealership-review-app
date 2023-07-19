@@ -9,7 +9,7 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
     // const { dealershipName, productDetails, rating, comment} = req.body;
     const { comment, externalLinks, ...rest } = req.body;
     const mediaFiles = req.files as Express.Multer.File[]; // Cast to specific type
-
+    console.log(req.files)
     const commentWithMedia: any = {
       text: comment.text,
       user: comment.user,

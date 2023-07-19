@@ -31,7 +31,7 @@ const updateReviewComment = Joi.object({
     make: Joi.string().required(),
     model: Joi.string().required(),
     variant: Joi.string().required(),
-  }),
+  }).required(),
   user: Joi.string().required(),
   comment: Joi.object({
     text: Joi.string().required(),
