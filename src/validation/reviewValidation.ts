@@ -41,7 +41,7 @@ const updateReviewComment = Joi.object({
         Joi.object({
           type: Joi.string().valid('image', 'video', 'external').required(),
           imageData: Joi.binary().encoding('base64'),
-          mediaId: Joi.string(),
+          mediaId: Joi.string().hex().length(24),
           url: Joi.string(),
         }).or('imageData', 'mediaId', 'url').required(),
       )

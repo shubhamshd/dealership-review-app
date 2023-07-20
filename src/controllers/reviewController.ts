@@ -14,6 +14,11 @@ const createReview = async (req: MulterRequest, res: Response) => {
 
 const updateReviewComment = async (req: MulterRequest, res: Response) => {
   try {
+    const { comment, ...rest } = req.body;
+    req.body = {
+      comments: comment,
+      ...rest
+    }
     const savedReview = await reviewService.updateReviewComment(req.body);
     return res.status(201).json(savedReview);
   } catch (err) {

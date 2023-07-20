@@ -12,7 +12,6 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
     console.log(req.files)
     const commentWithMedia: any = {
       text: comment.text,
-      user: comment.user,
       media: [],
     };
     if (Array.isArray(mediaFiles) && mediaFiles.length > 0) {
@@ -33,7 +32,7 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
 
           return {
             type: 'video',
-            mediaId: mediaId, // Update with the appropriate URL or path
+            mediaId: mediaId.toString(), // Update with the appropriate URL or path
             // metadata: {
             //   duration: '00:01:30', // Example metadata for video duration
             // },
@@ -59,7 +58,7 @@ export const mediaHandler = async (req: MulterRequest, res: Response, next: Next
     }
 
     req.body = {
-      comments: [commentWithMedia],
+      comment: commentWithMedia,
       ...rest
     };
     
