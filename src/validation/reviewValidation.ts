@@ -50,4 +50,13 @@ const updateReviewComment = Joi.object({
   externalLinks: Joi.array().items(Joi.string())
 });
 
-export default { create, updateReviewComment };
+const getAllComments = Joi.object({
+  dealershipName: Joi.string().required(),
+  productDetails: Joi.object({
+    make: Joi.string().required(),
+    model: Joi.string().required(),
+    variant: Joi.string().required(),
+  }).required()
+});
+
+export default { create, updateReviewComment, getAllComments };

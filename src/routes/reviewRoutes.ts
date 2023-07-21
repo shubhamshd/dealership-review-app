@@ -12,6 +12,7 @@ const upload = multer({ storage }).any();
 const router = express.Router();
 
 router.post('/createReview', validate(reviewValidation.create), mediaHandler, reviewController.createReview);
+router.post('/getAllComments', validate(reviewValidation.getAllComments), reviewController.getAllComments);
 router.post('/updateReviewComment', upload, validate(reviewValidation.updateReviewComment), mediaHandler, validate(reviewValidation.updateReviewComment), reviewController.updateReviewComment);
 
 export default router;

@@ -34,4 +34,21 @@ const updateReviewComment = async (reviewData: IReview): Promise<IReview | null>
   }
 };
 
-export default { createReview, updateReviewComment };
+const getAllComments = async (reviewData: IReview): Promise<IReview | null> => {
+  try {
+
+    const filter = {
+      'dealershipName': reviewData.dealershipName,
+      'productDetails.make': reviewData.productDetails.make,
+      'productDetails.model': reviewData.productDetails.model,
+      'productDetails.variant': reviewData.productDetails.variant,
+    };
+    const review = await ReviewModel.findOne(filter);
+    return review;
+  } catch (err) {
+    console.log('Error fetching review:', err);
+    throw new Error('Failed to fetch review');
+  }
+};
+
+export default { createReview, updateReviewComment, getAllComments };

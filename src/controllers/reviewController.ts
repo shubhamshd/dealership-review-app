@@ -27,4 +27,14 @@ const updateReviewComment = async (req: MulterRequest, res: Response) => {
   }
 };
 
-export default { createReview, updateReviewComment };
+const getAllComments = async (req: MulterRequest, res: Response) => {
+  try {
+    const allComments = await reviewService.getAllComments(req.body);
+    return res.status(201).json(allComments);
+  } catch (err) {
+    console.log('error in controller : ', err)
+    res.status(500).json({ error: err });
+  }
+};
+
+export default { createReview, updateReviewComment, getAllComments };
